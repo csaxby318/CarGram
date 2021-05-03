@@ -5,6 +5,7 @@ const models = require('../models');
 const jwt = require('jsonwebtoken');
 const formidable = require('formidable')
 const authenticate = require('../authMiddleWare')
+const uuidv1 = require('uuid/v1')
 
 
 router.post('/register', (req, res) => {
@@ -63,6 +64,9 @@ function uploadFile(req, callback) {
 
     new formidable.IncomingForm().parse(req)
     .on('fileBegin', (name, file) => {
+
+        uniqueFilename = `${uuidv1()}.${file.name.split('.').pop()}`
+        file.name = uniqueFilename
         file.path = __basedir + '/uploads/' + file.name
     })
     .on('file', (name, file) => {
