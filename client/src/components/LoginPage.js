@@ -30,7 +30,6 @@ const LoginPage = (props) => {
                 const username = result.username
                 const name = result.name
                 const userId = result.userId
-                console.log(result)
                 // get the token and put it in local storage
                 localStorage.setItem("jsonwebtoken", token)
                 localStorage.setItem("username", username)
