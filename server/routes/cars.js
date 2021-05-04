@@ -25,13 +25,13 @@ router.post('/add-car', (req, res) => {
 })
 
 
-router.get('/my-car', authenticate, (req, res) => {
+router.get('/my-car/:userId', authenticate, (req, res) => {
 
-    const userId = req.session.userId
+    const userId = req.params.userId
     console.log(userId)
 
     models.Car.findAll({
-        Where: {
+        where: {
             userId: userId
         }
     }).then((cars) => {
