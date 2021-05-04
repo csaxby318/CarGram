@@ -3,15 +3,19 @@
 import { setAuthenticationHeader } from './utils/authenticate';
 import { connect } from 'react-redux';
 import * as actionCreators from './store/creators/actionCreators'
+import { NavLink} from 'react-router-dom'
+import MyCarPage from './MyCarPage';
 
 
 const UserProfilePage = (props) => {
 
-   
+    const fullName = localStorage.name 
+
     const signOut = () => {
         // remove token from local storage
         localStorage.removeItem('jsonwebtoken')
         localStorage.removeItem('username')
+        localStorage.removeItem('name')
 
         // clear up the authentication headers
         setAuthenticationHeader(null)
@@ -26,7 +30,9 @@ const UserProfilePage = (props) => {
 
     return (
         <div>
-            <h1>My Profile</h1>
+            <h1>Hi {fullName}! Welcome to your profile.</h1>
+            <MyCarPage />
+            <button><NavLink to="/add-car">Add A Car</NavLink></button>
             <button onClick={signOut}>Sign Out</button>
         </div>
     )

@@ -1,5 +1,6 @@
 
 const jwt = require('jsonwebtoken');
+const models = require('./models');
 
 const authenticate = (req, res, next) => {
 
@@ -9,7 +10,13 @@ const authenticate = (req, res, next) => {
         const decoded = jwt.verify(token, 'SOMETHINGSECRET')
         if(decoded) {
             const username = decoded.username
-            const authUser = users.find(user => user.username == username)
+            const userId = decoded.userId
+            const authUser = models.User.findOne({
+                where: {
+                    username: username,
+                    id: userId
+                }
+            })
             if(authUser) {
                 next() // perform the original request
             } else {

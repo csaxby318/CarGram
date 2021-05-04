@@ -5,7 +5,7 @@ const models = require('../models');
 const jwt = require('jsonwebtoken');
 const formidable = require('formidable')
 const authenticate = require('../authMiddleWare')
-const uuidv1 = require('uuid/v1')
+const uuid = require('uuid')
 
 
 router.post('/register', (req, res) => {
@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
 })
 
 
-router.post('/login', (req,res) => {
+router.post('/login', (req, res) => {
 
     const username = req.body.user.username
     const password = req.body.user.password
@@ -45,17 +45,22 @@ router.post('/login', (req,res) => {
     }).then((user) => {
             bcrypt.compare(password, user.password, (error, result) => {
                 if (result) {
-                    console.log(user.username)
-                    // generate a token 
-                    // DO NOT put sensitive data into the token
-                    const token = jwt.sign({ username: username }, 'SOMETHINGSECRET')
-                    res.json({success: true, token: token, username: username})
+                    if (req.session) {
+                        req.session.userId = user.id
+                        req.session.username = user.username
+                        req.session.name = user.name
+                        console.log(req.session)
+                        // generate a token 
+                        // DO NOT put sensitive data into the token
+                        const token = jwt.sign({ username: req.session.username, name: req.session.name, userId: req.session.userId}, 'SOMETHINGSECRET')
+                        res.json({success: true, token: token, username: req.session.username, name: req.session.name, userId: req.session.userId})
+                    }
                 } else {
-                    res.render('login')
+                    res.send('incorrect username/password')
                 }
             })
         }).catch((error) => {
-            res.render('login')
+            res.send('incorrect username/password')
         })
 })
 
@@ -65,7 +70,7 @@ function uploadFile(req, callback) {
     new formidable.IncomingForm().parse(req)
     .on('fileBegin', (name, file) => {
 
-        uniqueFilename = `${uuidv1()}.${file.name.split('.').pop()}`
+        uniqueFilename = `${uuid()}.${file.name.split('.').pop()}`
         file.name = uniqueFilename
         file.path = __basedir + '/uploads/' + file.name
     })

@@ -28,9 +28,14 @@ const LoginPage = (props) => {
             if(result.success) {
                 const token = result.token
                 const username = result.username
+                const name = result.name
+                const userId = result.userId
+                console.log(result)
                 // get the token and put it in local storage
                 localStorage.setItem("jsonwebtoken", token)
                 localStorage.setItem("username", username)
+                localStorage.setItem("name", name)
+                localStorage.setItem("userId", userId)
                 // set the authentication header
                 setAuthenticationHeader(token)
                 // dispatch to redux
