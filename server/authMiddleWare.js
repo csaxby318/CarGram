@@ -10,11 +10,9 @@ const authenticate = (req, res, next) => {
         const decoded = jwt.verify(token, 'SOMETHINGSECRET')
         if(decoded) {
             const username = decoded.username
-            const userId = decoded.userId
             const authUser = models.User.findOne({
                 where: {
-                    username: username,
-                    id: userId
+                    username: username
                 }
             })
             if(authUser) {
