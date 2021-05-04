@@ -4,6 +4,8 @@ import axiox from 'axios';
 
 const MyCarPage = (props) => {
 
+    const userId = localStorage.userId
+
     const [cars, setCars] = useState([])
 
     useEffect(() => {
@@ -11,7 +13,7 @@ const MyCarPage = (props) => {
     }, [])
 
     const fetchMyCar = () => {
-        axiox.get('http://localhost:8080/cars/my-car')
+        axiox.get(`http://localhost:8080/cars/my-car/${userId}`)
         .then(response => {
             if(response.data.error) {
                console.log(response.data.error)

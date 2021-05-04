@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import reducer from './components/store/reducer';
 
 import { setAuthenticationHeader } from './components/utils/authenticate';
+import * as actionCreators from './components/store/creators/actionCreators';
 import AddCarPage from './components/AddCarPage';
 import MyCarPage from './components/MyCarPage';
 
@@ -28,7 +29,10 @@ const token = localStorage.getItem('jsonwebtoken');
 setAuthenticationHeader(token)
 
 // perform a dispatch to change the global state based on the token
-store.dispatch({type: 'ON_LOGIN', payload: token})
+if(token) {
+  store.dispatch(actionCreators.userLogin(token))
+}
+
 
 ReactDOM.render(
   <React.StrictMode>
