@@ -3,9 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const models = require('../models');
 const jwt = require('jsonwebtoken');
-const formidable = require('formidable')
-const authenticate = require('../authMiddleWare')
-const uuid = require('uuid')
+
 
 
 router.post('/register', (req, res) => {
@@ -64,26 +62,5 @@ router.post('/login', (req, res) => {
         })
 })
 
-
-function uploadFile(req, callback) {
-
-    new formidable.IncomingForm().parse(req)
-    .on('fileBegin', (name, file) => {
-
-        uniqueFilename = `${uuid()}.${file.name.split('.').pop()}`
-        file.name = uniqueFilename
-        file.path = __basedir + '/uploads/' + file.name
-    })
-    .on('file', (name, file) => {
-        callback(file.name)
-    })
-}
-
-router.post('/upload', (req, res) => {
-
-    uploadFile(req, (photoURL) => {
-        res.send('UPLOAD')
-    })
-})
 
 module.exports = router

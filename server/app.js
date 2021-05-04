@@ -22,7 +22,6 @@ app.use('/cars', carRouter)
 app.use('/uploads', express.static('uploads'));
 
 
-
 app.listen(8080, () => {
     console.log('Server listening on port 8080...')
 })
