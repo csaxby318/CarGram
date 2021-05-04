@@ -11,7 +11,8 @@ const UserProfilePage = () => {
         <div>
             <h1>Hi {fullName}! Welcome to your profile.</h1>
             <MyCarPage />
-            <NavLink to="/add-car">Add A Car</NavLink>
+            <NavLink to="/add-car">Add A Car</NavLink><br/>
+            <NavLink to="/add-photos">Add Car Photos</NavLink>
         </div>
     )
 }

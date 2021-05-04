@@ -21,6 +21,7 @@ import { setAuthenticationHeader } from './components/utils/authenticate';
 import * as actionCreators from './components/store/creators/actionCreators';
 import AddCarPage from './components/AddCarPage';
 import MyCarPage from './components/MyCarPage';
+import AddPhotosPage from './components/AddPhotosPage';
 
 // creates the Central Store (which stores the entire application state)
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -46,6 +47,7 @@ ReactDOM.render(
             <Route path="/my-profile" component={UserProfilePage} />
             <Route path="/add-car" component={AddCarPage} />
             <Route path="/my-car" component={MyCarPage} />
+            <Route path="/add-photos" component={AddPhotosPage} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>
