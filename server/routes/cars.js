@@ -43,6 +43,54 @@ router.get('/my-car/:userId', authenticate, (req, res) => {
 })
 
 
+router.get('/my-car/edit/:carId', (req, res) => {
+
+    const carId = req.params.carId
+
+    models.Car.findOne({
+        where: {
+            id: carId
+        }
+    }).then((car) => {
+        res.json(car)
+    })
+})
+
+
+router.post('/my-car/edit/:carId', (req, res) => {
+    
+    const carId = req.params.carId
+    const year = req.body.car.year
+    const make = req.body.car.make
+    const model = req.body.car.model
+
+    models.Car.update({
+        year: year,
+        make: make,
+        model: model
+    }, {
+        where: {
+            id: carId
+        }
+    }).then(updatedCar => {
+        console.log(updatedCar)
+    })
+})
+
+
+router.post('/my-car/delete/:carId', (req, res) => {
+    
+    const carId = req.params.carId
+
+    models.Car.destroy({
+        where: {
+            id: carId
+        }
+    }).then(deletedCar => {
+        console.log(deletedCar)
+    })
+})
+
 
 function uploadFile(req, callback) {
     

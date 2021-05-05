@@ -20,7 +20,7 @@ const AddCarPage = () => {
     }
 
     const handleCarAdd = () => {
-        // console.log({car})
+        
         fetch('http://localhost:8080/cars/add-car', {
             method: 'POST',
             headers: {
