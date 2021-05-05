@@ -1,8 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import axiox from 'axios';
+import { NavLink } from 'react-router-dom';
 
-const MyCarPage = (props) => {
+const MyCarPage = () => {
 
     const userId = localStorage.userId
 
@@ -24,7 +25,7 @@ const MyCarPage = (props) => {
     }
 
     const carItems = cars.map((car, index) => {
-        return <div key={index}>{car.year} {car.make} {car.model}</div>
+        return <div key={index}>{car.year} {car.make} {car.model} - <NavLink to={`/edit-car/${car.id}`}>Edit Car</NavLink></div>
     })
 
     return (
