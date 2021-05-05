@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import axiox from 'axios';
+import { NavLink } from 'react-router-dom';
 
 const EditCarPage = (props) => {
 
@@ -56,7 +57,8 @@ const EditCarPage = (props) => {
 
     return (
         <div>
-            <p>Edit Car</p>
+            <NavLink to = "/my-profile">Back</NavLink>
+            <br/><br/><h3>Edit Car</h3>
             <input type="text" placeholder="Year" name="year" value={car.year} onChange={handleOnChange} />
             <input type="text" placeholder="Make" name="make" value={car.make} onChange={handleOnChange} />
             <input type="text" placeholder="Model" name="model" value={car.model} onChange={handleOnChange} />

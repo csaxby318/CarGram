@@ -102,18 +102,44 @@ function uploadFile(req, callback) {
         file.path = __basedir + '/uploads/' + file.name
     })
     .on('file', (name, file) => {
-
-        callback(file.name)
+        const photoURL = `http://localhost:8080/uploads/${file.name}`
+        callback(photoURL)
     })
 }
 
-router.post('/photo-upload', (req, res) => {
+router.post('/photo-upload/:carId', (req, res) => {
 
     uploadFile(req, (photoURL) => {
-
+        console.log(photoURL)
         res.send('UPLOAD')
+
+   
+    const fileName = photoURL
+    const carId = req.params.carId
+
+    let photo = models.Photo.build({
+        fileName: fileName,
+        carId: carId
+    })
+
+    photo.save().then((savedPhoto) => {
+        console.log(savedPhoto)
+    })
     })
 })
 
+
+router.get('/my-car/photos/:carId', (req, res) => {
+
+    const carId = req.params.carId
+
+    models.Photo.findAll({
+        where: {
+            carId: carId
+        }
+    }).then((photos) => {
+        res.json(photos)
+    })
+})
 
 module.exports = router

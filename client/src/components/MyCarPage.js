@@ -25,7 +25,7 @@ const MyCarPage = () => {
     }
 
     const carItems = cars.map((car, index) => {
-        return <div key={index}>{car.year} {car.make} {car.model} - <NavLink to={`/edit-car/${car.id}`}>Edit Car</NavLink></div>
+        return <div key={index}> <br/> <h4>{car.year} {car.make} {car.model}</h4> <NavLink to={`/edit-car/${car.id}`}>Edit Car</NavLink> - <NavLink to={`/add-photos/${car.id}`}>Add Car Photos</NavLink> - <NavLink to={`/my-car-photos/${car.id}`}>View Car Photos</NavLink></div>
     })
 
     return (
