@@ -23,6 +23,7 @@ import AddCarPage from './components/AddCarPage';
 import MyCarPage from './components/MyCarPage';
 import AddPhotosPage from './components/AddPhotosPage';
 import EditCarPage from './components/EditCarPage';
+import MyCarPhotosPage from './components/MyCarPhotosPage';
 
 // creates the Central Store (which stores the entire application state)
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -48,8 +49,9 @@ ReactDOM.render(
             <Route path="/my-profile" component={UserProfilePage} />
             <Route path="/add-car" component={AddCarPage} />
             <Route path="/my-car" component={MyCarPage} />
-            <Route path="/add-photos" component={AddPhotosPage} />
+            <Route path="/add-photos/:carId" component={AddPhotosPage} />
             <Route path="/edit-car/:carId" component={EditCarPage} />
+            <Route path="/my-car-photos/:carId" component={MyCarPhotosPage} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>

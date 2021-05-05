@@ -9,10 +9,11 @@ const UserProfilePage = () => {
 
     return (
         <div>
-            <h1>Hi {fullName}! Welcome to your profile.</h1>
-            <MyCarPage />
+            <br/>
+            <h2>Hi <strong>{fullName}!</strong> Welcome to your profile.</h2><br/>
             <NavLink to="/add-car">Add A Car</NavLink><br/>
-            <NavLink to="/add-photos">Add Car Photos</NavLink>
+            <MyCarPage />
+            
         </div>
     )
 }

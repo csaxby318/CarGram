@@ -1,8 +1,9 @@
 
 import axios from 'axios';
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
-const AddPhotosPage = () => {
+const AddPhotosPage = (props) => {
     
     const [photos, setPhotos] = useState([])
 
@@ -17,7 +18,7 @@ const AddPhotosPage = () => {
             data.append('file', selectedPhoto)
         } 
 
-        axios.post('http://localhost:8080/cars/photo-upload', data)
+        axios.post(`http://localhost:8080/cars/photo-upload/${props.match.params.carId}`, data)
             .then((res) => {
                 setPhotos({ photos: [res.data, ...photos] })
             })
@@ -26,6 +27,8 @@ const AddPhotosPage = () => {
     
     return (
         <div>
+            <NavLink to="/my-profile">Back</NavLink>
+            <br /><br />
             <h1>Add Photos</h1>
             <input type="file" name="file" accept="image/*" multiple={false} onChange={uploadHandler} />
         </div>

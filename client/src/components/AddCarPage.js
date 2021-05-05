@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const AddCarPage = () => {
     
@@ -32,6 +33,8 @@ const AddCarPage = () => {
 
     return (
         <div>
+            <NavLink to="/my-profile">Back</NavLink>
+            <br /><br />
             <h1>Add Car</h1>
             <input type="text" placeholder="Year" name="year" onChange={handleOnChange} />
             <input type="text" placeholder="Make" name="make" onChange={handleOnChange} />

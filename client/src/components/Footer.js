@@ -4,7 +4,7 @@ import '../App.css';
 const Footer = () => {
 
     return (
-        <footer className="bg-dark text-white pt-5 pb-4">
+        <footer className="bg-dark text-white pt-5 pb-4 position-static">
             <div className="container text-center text-light">
                 © 2021 Copyright:
                 <a className="text-light" href="/">ExoticSwap.com</a>
