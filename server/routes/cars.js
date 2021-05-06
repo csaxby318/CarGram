@@ -27,6 +27,15 @@ router.post('/add-car', (req, res) => {
 })
 
 
+// router.get('/', (req, res) => {
+
+//     models.Car.findAll({})
+//     .then((cars) => {
+//         res.json(cars)
+//     })
+
+// })
+
 router.get('/my-car/:userId', authenticate, (req, res) => {
 
     const userId = req.params.userId
@@ -35,7 +44,11 @@ router.get('/my-car/:userId', authenticate, (req, res) => {
     models.Car.findAll({
         where: {
             userId: userId
-        }
+        },
+        include: [{
+            model: models.Photo, 
+            as: 'photos',
+        }] 
     }).then((cars) => {
         res.json(cars)
     })
@@ -43,7 +56,7 @@ router.get('/my-car/:userId', authenticate, (req, res) => {
 })
 
 
-router.get('/my-car/edit/:carId', (req, res) => {
+router.get('/my-car/edit/:carId', authenticate, (req, res) => {
 
     const carId = req.params.carId
 
@@ -107,7 +120,7 @@ function uploadFile(req, callback) {
     })
 }
 
-router.post('/photo-upload/:carId', (req, res) => {
+router.post('/photo-upload/:carId', authenticate, (req, res) => {
 
     uploadFile(req, (photoURL) => {
         console.log(photoURL)
@@ -129,7 +142,7 @@ router.post('/photo-upload/:carId', (req, res) => {
 })
 
 
-router.get('/my-car/photos/:carId', (req, res) => {
+router.get('/my-car/photos/:carId', authenticate, (req, res) => {
 
     const carId = req.params.carId
 
@@ -140,6 +153,20 @@ router.get('/my-car/photos/:carId', (req, res) => {
     }).then((photos) => {
         res.json(photos)
     })
+})
+
+
+router.get('/', (req, res) => {
+
+    models.Car.findAll({ 
+        include: [{
+            model: models.Photo, 
+            as: 'photos',
+        }] 
+    })
+    .then((cars) => {
+        res.send(cars)
+    }) 
 })
 
 module.exports = router

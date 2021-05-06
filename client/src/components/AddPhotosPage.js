@@ -21,6 +21,7 @@ const AddPhotosPage = (props) => {
         axios.post(`http://localhost:8080/cars/photo-upload/${props.match.params.carId}`, data)
             .then((res) => {
                 setPhotos({ photos: [res.data, ...photos] })
+                window.location.href = "/my-profile"
             })
     }
 

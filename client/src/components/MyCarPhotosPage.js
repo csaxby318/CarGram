@@ -22,12 +22,6 @@ const MyCarPhotosPage = (props) => {
             })
     }
 
-    // const photoItems = photos.map((photo, index) => {
-    //     return <div key={index}> <img src={photo.fileName} /> </div>
-    // })
-
-
-
     return (
         <div>
             <NavLink to="/my-profile">Back</NavLink>

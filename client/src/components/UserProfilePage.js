@@ -13,7 +13,6 @@ const UserProfilePage = () => {
             <h2>Hi <strong>{fullName}!</strong> Welcome to your profile.</h2><br/>
             <NavLink to="/add-car">Add A Car</NavLink><br/>
             <MyCarPage />
-            
         </div>
     )
 }

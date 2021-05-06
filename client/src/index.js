@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import reducer from './components/store/reducer';
 
 import { setAuthenticationHeader } from './components/utils/authenticate';
+import requireAuth from './components/requireAuth'
 import * as actionCreators from './components/store/creators/actionCreators';
 import AddCarPage from './components/AddCarPage';
 import MyCarPage from './components/MyCarPage';
@@ -46,12 +47,12 @@ ReactDOM.render(
             <Route exact path="/" component={HomePage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/login" component={LoginPage} />
-            <Route path="/my-profile" component={UserProfilePage} />
-            <Route path="/add-car" component={AddCarPage} />
-            <Route path="/my-car" component={MyCarPage} />
-            <Route path="/add-photos/:carId" component={AddPhotosPage} />
-            <Route path="/edit-car/:carId" component={EditCarPage} />
-            <Route path="/my-car-photos/:carId" component={MyCarPhotosPage} />
+            <Route path="/my-profile" component={requireAuth(UserProfilePage)} />
+            <Route path="/add-car" component={requireAuth(AddCarPage)} />
+            <Route path="/my-car" component={requireAuth(MyCarPage)} />
+            <Route path="/add-photos/:carId" component={requireAuth(AddPhotosPage)} />
+            <Route path="/edit-car/:carId" component={requireAuth(EditCarPage)} />
+            <Route path="/my-car-photos/:carId" component={requireAuth(MyCarPhotosPage)} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>

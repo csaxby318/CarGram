@@ -63,4 +63,23 @@ router.post('/login', (req, res) => {
 })
 
 
+router.get('/', (req, res) => {
+
+    models.User.findAll({ 
+        include: [{
+            model: models.Car, 
+            as: 'cars',
+            include: [{
+               model: models.Photo,
+               as: 'photos'
+            }]
+        }] 
+    })
+    .then((users) => {
+        res.send(users)
+    })
+    
+
+})
+
 module.exports = router
