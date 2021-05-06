@@ -34,3 +34,11 @@ code {
   top: 0;
   left: 0;
 }
+
+@media (max-width: 800px) {
+  .img-grid {
+    display: flex;
+    flex-direction: column;
+  }
+ 
+}
